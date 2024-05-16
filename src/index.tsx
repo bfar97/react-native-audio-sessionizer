@@ -1,4 +1,9 @@
 import { NativeModules, Platform } from 'react-native';
+import {
+  AudioSessionCategoryOptions,
+  AudioSessionCategoryTypes,
+} from './categoryTypes';
+import type { AudioSessionModeTypes } from './modeTypes';
 
 const LINKING_ERROR =
   `The package 'react-native-audio-sessionizer' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +22,18 @@ const AudioSessionizer = NativeModules.AudioSessionizer
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return AudioSessionizer.multiply(a, b);
-}
+export const setCategory = (
+  category: AudioSessionCategoryTypes,
+  options: AudioSessionCategoryOptions[]
+): Promise<void> => {
+  const optionValues = options.map((option) => option.valueOf());
+  return AudioSessionizer.setCategory(category.valueOf(), optionValues);
+};
+
+export const setMode = (mode: AudioSessionModeTypes): Promise<void> => {
+  return AudioSessionizer.setMode(mode);
+};
+
+export const setActive = (active: boolean): Promise<void> => {
+  return AudioSessionizer.setActive(active);
+};
