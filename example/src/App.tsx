@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 import {
-  setActive,
-  setCategory,
-  setMode,
+  setAudioSessionState,
+  setAudioSessionCategory,
+  setAudioSessionMode,
 } from 'react-native-audio-sessionizer';
 import {
   AudioSessionCategoryOptions,
@@ -13,10 +13,10 @@ import {
 import { AudioSessionModeTypes } from '../../src/modeTypes';
 
 export default function App() {
-  const [active, setActiveState] = React.useState(false);
+  const [active, setAudioSessionStateState] = React.useState(false);
 
   React.useEffect(() => {
-    setCategory(AudioSessionCategoryTypes.Playback, [
+    setAudioSessionCategory(AudioSessionCategoryTypes.Playback, [
       AudioSessionCategoryOptions.DuckOthers,
     ])
       .then(() => {
@@ -26,14 +26,14 @@ export default function App() {
         console.log('Setting Category failed', err);
       });
 
-    setMode(AudioSessionModeTypes.VoicePrompt)
+    setAudioSessionMode(AudioSessionModeTypes.VoicePrompt)
       .then(() => {
         console.log('Setting Mode was successful');
       })
       .catch((err) => {
         console.log('Setting Mode failed', err);
       });
-    setActive(false)
+    setAudioSessionState(false)
       .then(() => {
         console.log('Setting Active was successful');
       })
@@ -43,8 +43,8 @@ export default function App() {
   }, []);
 
   const toggleAudioSession = async () => {
-    await setActive(!active);
-    setActiveState((p) => !p);
+    await setAudioSessionState(!active);
+    setAudioSessionStateState((p) => !p);
   };
 
   return (

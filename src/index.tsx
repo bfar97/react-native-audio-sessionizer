@@ -22,7 +22,7 @@ const AudioSessionizer = NativeModules.AudioSessionizer
       }
     );
 
-export const setCategory = (
+export const setAudioSessionCategory = (
   category: AudioSessionCategoryTypes,
   options: AudioSessionCategoryOptions[]
 ): Promise<void> => {
@@ -30,10 +30,12 @@ export const setCategory = (
   return AudioSessionizer.setCategory(category.valueOf(), optionValues);
 };
 
-export const setMode = (mode: AudioSessionModeTypes): Promise<void> => {
+export const setAudioSessionMode = (
+  mode: AudioSessionModeTypes
+): Promise<void> => {
   return AudioSessionizer.setMode(mode);
 };
 
-export const setActive = (active: boolean): Promise<void> => {
+export const setAudioSessionState = (active: boolean): Promise<void> => {
   return AudioSessionizer.setActive(active);
 };
