@@ -26,14 +26,20 @@ export const setAudioSessionCategory = (
   category: AudioSessionCategoryTypes,
   options: AudioSessionCategoryOptions[]
 ): Promise<void> => {
-  const optionValues = options.map((option) => option.valueOf());
-  return AudioSessionizer.setCategory(category.valueOf(), optionValues);
+  if (Platform.OS === 'ios') {
+    const optionValues = options.map((option) => option.valueOf());
+    return AudioSessionizer.setCategory(category.valueOf(), optionValues);
+  }
+  return Promise.reject('SetAudioSessionCategory is only available in iOS');
 };
 
 export const setAudioSessionMode = (
   mode: AudioSessionModeTypes
 ): Promise<void> => {
-  return AudioSessionizer.setMode(mode);
+  if (Platform.OS === 'ios') {
+    return AudioSessionizer.setMode(mode);
+  }
+  return Promise.reject('SetAudioSessionMode is only available in iOS');
 };
 
 export const setAudioSessionState = (active: boolean): Promise<void> => {

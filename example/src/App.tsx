@@ -43,19 +43,25 @@ export default function App() {
   }, []);
 
   const toggleAudioSession = async () => {
-    await setAudioSessionState(!active);
-    setAudioSessionStateState((p) => !p);
+    await setAudioSessionState(!active)
+      .then(() => {
+        console.log(`Setting Active ${!active} was successful`);
+        setAudioSessionStateState((p) => !p);
+      })
+      .catch((err) => {
+        console.log('Setting Active failed', err);
+      });
   };
 
   return (
     <View style={styles.container}>
-      <Text>Audio Sessionizer</Text>
+      <Text style={styles.text}>Audio Sessionizer</Text>
       <View style={styles.spacer} />
       <Pressable style={styles.button} onPress={toggleAudioSession}>
-        <Text style={styles.text}>Activate Audio Session</Text>
+        <Text style={styles.textButton}>Activate Audio Session</Text>
       </Pressable>
       <View style={styles.spacer} />
-      <Text>
+      <Text style={styles.text}>
         {active ? 'Audio Session is active' : 'Audio Session is inactive'}
       </Text>
     </View>
@@ -84,6 +90,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   text: {
+    color: 'black',
+  },
+  textButton: {
     color: 'white',
   },
   spacer: {
