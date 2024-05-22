@@ -5,6 +5,9 @@ import {
 } from './categoryTypes';
 import type { AudioSessionModeTypes } from './modeTypes';
 
+export * from './categoryTypes';
+export * from './modeTypes';
+
 const LINKING_ERROR =
   `The package 'react-native-audio-sessionizer' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
